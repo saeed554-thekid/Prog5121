@@ -62,7 +62,7 @@ public class ResgistrationAndLoginFeature {
        System.out.println("Enter password to log back in");
        String loginPassword = input.nextLine();
    if(username.equals(loginUsername) && password.equals(loginPassword)){
-       System.out.print("Welcome"  + firstname + "," + lastname +   "it is great to see you again" );
+       System.out.print("Welcome"  + firstname + ", " + lastname +   "it is great to see you again" );
    }
    else{
        System.out.print("Username or password incorrect, please try again");
@@ -70,5 +70,4 @@ public class ResgistrationAndLoginFeature {
     }
     
 }
-//Used chatgpt to anaylise why my code is not working and explaining why its wrong
-//
+
