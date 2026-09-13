@@ -1,4 +1,3 @@
-
 package resgistration.and.login.feature;
 
 
@@ -21,13 +20,18 @@ public class Login {
     //registration response message
     public String registerUser(String username, String password, String cellphone, String firstname, String lastname){
         if(!checkUserName(username)){
-            return "Username is incorrectly formatted";
+            return ("Username is not correctly formatted; "
+                + "please ensure that your username contains an underscore "
+                + "and is more more than 5 characters in length.");
         }
      else if(!checkPasswordComplexity(password)){
-          return "Password does not meet the complexity requirements";
+          return "Passowrd is not correctly formatted, "
+                 + "please ensure the password contains atleast 8 characters, "
+                 + "a capital letter, a number and a special character.";
       }
      else if(!checkPhoneNumber(cellphone)){
-          return "Cellphone number incorrectly formatted or does not contain international code ";  
+          return "Cellphone number is incorrectly formatted "
+                 + " or  does not an international code"  ;
       }
      else{
          this.username = username;
@@ -43,7 +47,7 @@ public class Login {
       } 
     public String returnLoginStatus( String loginUserName, String loginPassword){
         if(loginUser(loginUserName, loginPassword)){
-            return "Welcome" + firstname + "," + lastname + "it is great to see you again";
+            return "Welcome "  + firstname +  ", "  + lastname +  " it is great to see you again.";
         }
         else{
             return "Username or password is incorrect";

@@ -11,8 +11,8 @@ public class ResgistrationAndLoginFeature {
       String username = input.nextLine();
       
     while(!username.contains("_") || username.length() > 5){
-        System.out.println("Username is not correctly formatted;"
-                + "please ensure that your username contains an underscore"
+        System.out.println("Username is not correctly formatted; "
+                + "please ensure that your username contains an underscore, "
                 + "and is more more than 5 characters in length");
         System.out.print("Enter username again: ");
         username = input.nextLine();
@@ -25,7 +25,7 @@ public class ResgistrationAndLoginFeature {
        String password = input.nextLine();
      while(password.length() < 8 || !password.matches(".*[A-Z].*") 
              || !password.matches(".*[0-9].*") || !password.matches(".*[^a-zA-Z0-9].*")){
-         System.out.println("Passowrd is not correctly formatted,"
+         System.out.println("Passowrd is not correctly formatted, "
                  + "please ensure the password contains atleast 8 characters, "
                  + "a capital letter, a number and a special character");
          System.out.print("Enter password again: ");
@@ -62,7 +62,7 @@ public class ResgistrationAndLoginFeature {
        System.out.println("Enter password to log back in");
        String loginPassword = input.nextLine();
    if(username.equals(loginUsername) && password.equals(loginPassword)){
-       System.out.print("Welcome"  + firstname + ", " + lastname +   "it is great to see you again" );
+       System.out.print("Welcome "  + firstname + ", " + lastname +   " it is great to see you again." );
    }
    else{
        System.out.print("Username or password incorrect, please try again");
