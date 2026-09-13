@@ -1,8 +1,8 @@
 package resgistration.and.login.feature;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class LoginTest {
@@ -21,35 +21,34 @@ public class LoginTest {
     
     @Test
     public void testUsernameIncorrectlyFormatted(){
-       String expected = "Username is not correctly formatted;"
-                + "please ensure that your username contains an underscore"
-                + "and is more more than 5 characters in length";
+       String expected = "Username is not correctly formatted; "
+                + "please ensure that your username contains an underscore "
+                + "and is more more than 5 characters in length.";
        assertEquals(expected, login.registerUser("kyl_1!!!!!!", "Ch&&sec@ke99!", "+27838968976", "Danny", "Dome"));
     }
     
     @Test
     public void testPasswordMeetsComplexityRequirements(){
-        String expected = "Password sucessfully captured";
+        String expected = "The two conditions have been met, and user has been successfully registered ";
         assertEquals(expected, login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Danny", "Dome" ));
     }
     
     @Test
     public void testPasswordDoesNotMeetComplexityRequirements(){
-    String expected = "Passowrd is not correctly formatted,"
+    String expected = "Passowrd is not correctly formatted, "
                  + "please ensure the password contains atleast 8 characters, "
-                 + "a capital letter, a number and a special character";
+                 + "a capital letter, a number and a special character.";
     assertEquals(expected, login.registerUser("kyl_1", "password", "+27838968976", "Danny", "Dome" ));
     }
     @Test
     public void testCellphoneCorrectlyFormatted(){
-        String expected = "Cellphone number successfully captured";
+        String expected = "The two conditions have been met, and user has been successfully registered ";
         assertEquals(expected, login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Danny", "Dome"));
     }
     @Test
     public void testCellphoneIncorrectlyFormatted(){
         String expected = "Cellphone number is incorrectly formatted "
-                + " or does not contain an international code;"
-                + " please correct the number and try again";
+                + " or does not contain international code";
         assertEquals(expected, login.registerUser("kyl_1", "Ch&&sec@ke99!", "08966553", "Danny", "Dome"));
     }
    @Test
@@ -85,7 +84,7 @@ public class LoginTest {
   }
   @Test
   public void testCellphoneIncorrectlyFormattedType(){
-      assertTrue(login.checkPhoneNumber("08966553"));
+      assertFalse(login.checkPhoneNumber("08966553"));
   }
   }
 

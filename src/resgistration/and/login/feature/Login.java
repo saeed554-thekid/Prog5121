@@ -31,7 +31,7 @@ public class Login {
       }
      else if(!checkPhoneNumber(cellphone)){
           return "Cellphone number is incorrectly formatted "
-                 + " or  does not an international code"  ;
+                 + " or does not contain international code"  ;
       }
      else{
          this.username = username;
