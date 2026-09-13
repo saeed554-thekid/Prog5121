@@ -38,7 +38,7 @@ public class LoginTest {
     String expected = "Passowrd is not correctly formatted,"
                  + "please ensure the password contains atleast 8 characters, "
                  + "a capital letter, a number and a special character";
-    assertEquals(expected, login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Danny", "Dome" ));
+    assertEquals(expected, login.registerUser("kyl_1", "password", "+27838968976", "Danny", "Dome" ));
     }
     @Test
     public void testCellphoneCorrectlyFormatted(){
@@ -62,6 +62,24 @@ public class LoginTest {
        login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Danny", "Dome");
        assertFalse(login.loginUser("kyl_1!!!!!!", "Ch&&sec@ke99!" ));
    }
+   @Test
+   public void testUsernameCorrectlyFormattedType(){
+       assertTrue(login.checkUserName("kyl_1"));
+   }
+   @Test
+   public void testUsernameIncorrectlyFormattedType(){
+       assertFalse(login.checkUserName("kyl_1!!!!!!"));
+   }
+   @Test
+   public void testPasswordMeetsComplexityRequirementsType(){
+       assertTrue(login.checkPasswordComplexity("Ch&&sec@ke99!"));
+   }
+   @Test
+   public void testPasswordDoesNotMeetComplexityRequirementsType(){
+       assertFalse(login.checkPasswordComplexity("password"));
+   }
    
-}
+  
+
+   }
 
