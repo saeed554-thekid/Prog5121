@@ -52,6 +52,16 @@ public class LoginTest {
                 + " please correct the number and try again";
         assertEquals(expected, login.registerUser("kyl_1", "Ch&&sec@ke99!", "08966553", "Danny", "Dome"));
     }
+   @Test
+   public void testLoginSuccessfully(){
+       login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Danny", "Dome");
+       assertTrue(login.loginUser("kyl_1", "Ch&&sec@ke99!"));
+   }
+   @Test
+   public void testLoginFailed(){
+       login.registerUser("kyl_1", "Ch&&sec@ke99!", "+27838968976", "Danny", "Dome");
+       assertFalse(login.loginUser("kyl_1!!!!!!", "Ch&&sec@ke99!" ));
+   }
    
 }
 
