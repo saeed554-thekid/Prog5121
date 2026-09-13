@@ -79,7 +79,13 @@ public class LoginTest {
        assertFalse(login.checkPasswordComplexity("password"));
    }
    
-  
-
-   }
+  @Test
+  public void testCellphoneCorrectlyFormattedType(){
+      assertTrue(login.checkPhoneNumber("+27838968976"));
+  }
+  @Test
+  public void testCellphoneIncorrectlyFormattedType(){
+      assertTrue(login.checkPhoneNumber("08966553"));
+  }
+  }
 
