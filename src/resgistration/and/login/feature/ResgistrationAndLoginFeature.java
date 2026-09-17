@@ -24,7 +24,7 @@ public class ResgistrationAndLoginFeature {
       //Password being created 
       System.out.print("Enter password: ");
        String password = input.nextLine();
-     while(login.checkPasswordComplexity(password)){
+     while(!login.checkPasswordComplexity(password)){
          System.out.println("Passowrd is not correctly formatted, "
                  + "please ensure the password contains atleast 8 characters, "
                  + "a capital letter, a number and a special character");
