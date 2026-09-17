@@ -37,7 +37,7 @@ public class ResgistrationAndLoginFeature {
      //Entering South African number
      System.out.print("Enter a South African cellphone: ");
      String cellphone = input.nextLine();
-     //the "\\" ensures that the phone number must start with +27 and the {9} allows only exactly 9 digits
+     //the "\\" ensures that the phone number must start with +27 and the {1,10} allows only exactly 10 digits
      while(!login.checkPhoneNumber(cellphone)){
          System.out.println("Cellphone number is incorrectly formatted"
                  + " or  does not an international code");
