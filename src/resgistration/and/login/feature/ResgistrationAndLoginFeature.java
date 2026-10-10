@@ -66,6 +66,63 @@ public class ResgistrationAndLoginFeature {
     
        String loginStatusMessage = login.returnLoginStatus(loginUsername, loginPassword);
        System.out.println(loginStatusMessage);
+       
+       //Part 2
+       if(login.loginUser(loginUsername,loginPassword)){
+           System.out.print("Welcome to Qickchat.");
+           
+           System.out.println("How many messages do you want to enter?");
+           int numberofMessages = Integer.parseInt(input.nextLine());
+           int messagesEntered = 0;
+           int menuoption = 0;
+           
+           //menuoption choices
+           while(menuoption != 3){
+               System.out.println("option 1) Send messages");
+               System.out.println("Option 2) Coming soon");
+               System.out.println("option 3) Quit");
+               System.out.print("Choose an option: ");
+               menuoption = Integer.parseInt(input.nextLine());
+               
+               //Option 1
+              if(menuoption == 1 && messagesEntered < numberofMessages){
+                  String messageIDMessage = login.createMessageID();
+                  System.out.println(messageIDMessage);
+                  
+                  //Recipient cell number
+                  System.out.print("Enter recipient cellphone number");
+                  String recipient = input.nextLine();
+                  while(recipient.length() > 10 || !login.checkPhoneNumber(recipient)){
+                      System.out.println("Cellphone number is incorrectedly formatted"
+                              + "or does not contain an international code.");
+                      System.out.print("Enter recipient cellphone number again: ");
+                      recipient = input.nextLine();
+                  }
+                  
+                  String recipientMessage = login.checkRecipientCell(recipient);
+                  System.out.print(recipientMessage);
+                  
+                  //Messages being entered by the user
+                  System.out.print("Enter your message: ");
+                  String message = input.nextLine();
+                  while(message.length() > 250){
+                      System.out.println("Please enter a message of less than 250 characters");
+                      message = input.nextLine();
+                      
+                  }
+                  System.out.println(messageStatus);
+                  System.out.println("Message sent");
+                  
+                  
+                  String messageHash = login.checkcreateMessageHash();
+                  
+                  
+                  //Options to do with ur message
+                
+              }
+              
+           }
+       }
     }
     
 }

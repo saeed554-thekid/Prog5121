@@ -1,11 +1,23 @@
 package resgistration.and.login.feature;
 
+import java.io.*;
+//this line finds the file and opens it as in creating a path
+import java.nio.file.*;
+//shows how to open the file
+import java.nio.file.StandardOpenOption.*;
 
 public class Login {
       private String username;
       private String password;
       private String firstname;
       private String lastname;
+      
+      //Fields for part 2
+      private String messageID;
+      private int numMessageSent = '0';
+      private String Recipient; 
+      private String MessageHash; 
+      private String message;       
 
 //Methods
     public boolean checkUserName(String username){
@@ -54,4 +66,5 @@ public class Login {
             
         }
 }
+      
 }
