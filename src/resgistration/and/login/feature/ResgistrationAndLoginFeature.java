@@ -113,17 +113,31 @@ public class ResgistrationAndLoginFeature {
                   System.out.println(messageStatus);
                   System.out.println("Message sent");
                   
-                  
+                  //The message Hash
                   String messageHash = login.checkcreateMessageHash();
-                  
-                  
+                 
                   //Options to do with ur message
+                System.out.println("Send Message");
+                System.out.println("Disgard Message");
+                System.out.println("Store Message to send later");
+                System.out.print("Select an option: ");
+                String sendOption = input.nextLine();
+                int sendChoice = Integer.parseInt(input.nextLine());
                 
+                login.SentMessage(sendChoice);
+                if(sendChoice == 1){
+                  System.out.println("Message successfully sent");
+                  System.out.println(login.returnMessageDetails);
+                }
+               
+                }
+                
+                        
               }
               
            }
        }
     }
     
-}
+
 
