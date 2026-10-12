@@ -14,7 +14,7 @@ public class ResgistrationAndLoginFeature {
     while(!login.checkUserName(username)){
         System.out.println("Username is not correctly formatted; "
                 + "please ensure that your username contains an underscore, "
-                + "and is more more than 5 characters in length");
+                + "and is no more than 5 characters in length");
         System.out.print("Enter username again: ");
         username = input.nextLine();
     }
@@ -71,8 +71,7 @@ public class ResgistrationAndLoginFeature {
        if(login.loginUser(loginUsername,loginPassword)){
            System.out.print("Welcome to Qickchat.");
            
-           System.out.println("How many messages do you want to enter?");
-           int numberofMessages = Integer.parseInt(input.nextLine());
+           int numberofMessages = 0;
            int messagesEntered = 0;
            int menuoption = 0;
            
@@ -84,11 +83,14 @@ public class ResgistrationAndLoginFeature {
                System.out.print("Choose an option: ");
                menuoption = Integer.parseInt(input.nextLine());
                
-               //Option 1
+               //Ask how many managers that the user want to enter if he/she chose option 1
+              if(menuoption == 1 &&  numberofMessages == 0){
+                 System.out.println("How many messages you want to enter?");
+                 numberofMessages = Integer.parseInt(input.nextLine());
+              }
+              
               if(menuoption == 1 && messagesEntered < numberofMessages){
-                  String messageIDMessage = login.createMessageID();
-                  System.out.println(messageIDMessage);
-                  
+                      
                   //Recipient cell number
                   System.out.print("Enter recipient cellphone number");
                   String recipient = input.nextLine();
