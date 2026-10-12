@@ -122,19 +122,36 @@ public class ResgistrationAndLoginFeature {
                 System.out.println("Store Message to send later");
                 System.out.print("Select an option: ");
                 String sendOption = input.nextLine();
-                int sendChoice = Integer.parseInt(input.nextLine());
-                
-                login.SentMessage(sendChoice);
-                if(sendChoice == 1){
-                  System.out.println("Message successfully sent");
-                  System.out.println(login.returnMessageDetails);
+             
+                //The outcomes for the selected options
+               while(!sendOption.equals("Send Message") && !sendOption.equals("Disgard Message") && !sendOption.equals("Store Message to send later")){
+                   System.out.print("Select an option again.");
+                    sendOption = input.nextLine();
+               }
+               login.SendMessage(sendOption);
+               if(sendOption.equals("Send Message")){
+                   System.out.println("Message sent successfully");
+                   
                 }
-               
-                }
-                
-                        
+               else if(sendOption.equals("Disgard Message")){
+                   System.out.println("Press 0 to delete the message");
+               }
+               else{
+                   System.out.println("Message successfully stored");
+               }
+                  messagesEntered++;
+               }
+              else if(menuoption == 1){
+                  System.out.println("you have already  all" +numberofMessages+ "messages");
+              } 
+              else if(menuoption == 2){
+                  System.out.println("Coming soon");
+              }
               }
               
+           //The total number of messages sent
+           System.out.println("Total number of messages sent: " +login.retunrTotalMessage());
+           
            }
        }
     }

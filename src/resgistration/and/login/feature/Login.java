@@ -1,10 +1,6 @@
 package resgistration.and.login.feature;
 
 import java.io.*;
-//this line finds the file and opens it as in creating a path
-import java.nio.file.*;
-//shows how to open the file
-import java.nio.file.StandardOpenOption.*;
 
 public class Login {
       private String username;
@@ -15,9 +11,10 @@ public class Login {
       //Fields for part 2
       private String messageID;
       private int numMessageSent = '0';
-      private String Recipient; 
+      private String recipient; 
+      private String messageText;
       private String MessageHash; 
-      private String message;       
+      private String allMesssages = "";       
 
 //Methods
     public boolean checkUserName(String username){
@@ -63,8 +60,88 @@ public class Login {
         }
         else{
             return "Username or password is incorrect";
-            
         }
 }
-      
+       //Part 2 methods
+public String createMessageID(){
+    messageID = "";
+    for(int  i  = 0; i < 10; i++){
+    messageID = messageID + (int)(Math.random() * 10);
 }
+    return "Message ID generated: " + messageID;
+}
+public boolean checkMessageID(){
+    return messageID.length() <=10;
+}
+public String checkRecipientCell(String cellphone){
+    if(checkPhoneNumber(cellphone)){
+        recipient = cellphone;
+        return "Cellphone number sucessfully captured.";
+}
+    else{
+    return "Cellphone number is incorrectly formatted"
+            + " or does not contain an international code." ;
+}    
+     
+ }
+public String checkMessage(String text){
+    if(text.length() <= 250){
+        messageText = text;
+        return "Message ready to send.";
+    }
+    else{
+        return "Message exceeds 250 characters by " + (textlenght() - 250) + "; please reduce the size.";
+    }     
+}
+
+public String createMessageHash(){
+    String[] word =  messageText.split(" ");
+    String firstWord = word[0].replaceAll(".*[^a-zA-Z0-9].*","");
+    String lastWord = words[words.length - 1].replaceAll(".*[^a-zA-Z0-9].*", "");
+    messageHash = (messageID.substring(0, 2) + ":" + numMessageSent + ":" + firstWord + lastWord).toUpperCase();
+    return messageHash;
+}
+
+//options to do with messages
+public String SentMessage(String sendOption){
+    if(sendOptoin.equals("Send Message")){
+        allMessages = allMessages + "MessageID: " + messageID + "\nMessage Hash: " + messageHash + "\nRecipient: " + recipient + "\nMessage: " + messageText + "\n\n";
+        numMessageSent++;
+        return "Message Sent.";
+    }
+    else if(sendOption.equals("Disgard Message")){
+        return "Press 0 to delete the message.";
+    }
+    else{
+        storeMessage();
+        return"Message successfully stored.";
+    }
+     
+}
+public String printMessage(){
+    return allMessages;
+}
+public int returnTotalMessages(){
+    return numMessageSent;
+}
+//This stores messages in the JSON file
+public void storeMessage(){
+    try{
+        BufferedWriter writer = new BufferedWriter(new FileWriter("storeMessage.json", true));
+        writer.write("{\"messageID\": \"" + messageID + "\", \"message\":\"" + messageHash + "\", \"recipient\": \"" + recipient + "\", \"message\": \""  + messageText + "\"}" );
+    writer.newLine();
+    writer.close();
+    }
+    catch(IOException e){
+        System.out.println("Could not write JSON file");
+    }
+}
+public void setMessageID(String messageID){
+    this.messageID = messageID;
+}
+public void setNumMessageSent( int numMessageSent){
+    this.numMessageSent = numMessageSent;
+}
+}
+
+
