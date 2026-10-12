@@ -110,11 +110,12 @@ public class ResgistrationAndLoginFeature {
                       message = input.nextLine();
                       
                   }
+                  String messageStatus = login.checkMessage(message);
                   System.out.println(messageStatus);
                   System.out.println("Message sent");
                   
                   //The message Hash
-                  String messageHash = login.checkcreateMessageHash();
+                  String messageHash = login.createMessageHash();
                  
                   //Options to do with ur message
                 System.out.println("Send Message");
@@ -128,7 +129,7 @@ public class ResgistrationAndLoginFeature {
                    System.out.print("Select an option again.");
                     sendOption = input.nextLine();
                }
-               login.SendMessage(sendOption);
+               login.SentMessage(sendOption);
                if(sendOption.equals("Send Message")){
                    System.out.println("Message sent successfully");
                    
@@ -150,7 +151,7 @@ public class ResgistrationAndLoginFeature {
               }
               
            //The total number of messages sent
-           System.out.println("Total number of messages sent: " +login.retunrTotalMessage());
+           System.out.println("Total number of messages sent: " +login.returnTotalMessages());
            
            }
        }
