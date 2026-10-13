@@ -103,7 +103,7 @@ public class ResgistrationAndLoginFeature {
                   }
                   
                   String recipientMessage = login.checkRecipientCell(recipient);
-                  System.out.print(recipientMessage);
+                  System.out.println(recipientMessage);
                   
                   //Messages being entered by the user
                   System.out.print("Enter your message: ");
@@ -121,9 +121,9 @@ public class ResgistrationAndLoginFeature {
                   String messageHash = login.createMessageHash();
                  
                   //Options to do with ur message
-                System.out.println("Send Message");
-                System.out.println("Disregard Message");
-                System.out.println("Store Message to send later");
+                System.out.println("1) Send Message");
+                System.out.println("2) Disregard Message");
+                System.out.println("3) Store Message to send later");
                 System.out.print("Select an option: ");
                 String sendOption = input.nextLine();
              
