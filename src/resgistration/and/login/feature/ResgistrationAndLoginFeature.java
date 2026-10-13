@@ -58,10 +58,10 @@ public class ResgistrationAndLoginFeature {
      System.out.println(registrationMessage);
              
      //User entering his username and password to login 
-     System.out.println("Enter username to log back in ");
+     System.out.print("Enter username to log back in: ");
        String loginUsername = input.nextLine();
        
-       System.out.println("Enter password to log back in");
+       System.out.print("Enter password to log back in: ");
        String loginPassword = input.nextLine();
     
        String loginStatusMessage = login.returnLoginStatus(loginUsername, loginPassword);
@@ -69,7 +69,7 @@ public class ResgistrationAndLoginFeature {
        
        //Part 2
        if(login.loginUser(loginUsername,loginPassword)){
-           System.out.print("Welcome to Qickchat.");
+           System.out.println("Welcome to Qickchat.");
            
            int numberofMessages = 0;
            int messagesEntered = 0;
@@ -85,16 +85,17 @@ public class ResgistrationAndLoginFeature {
                
                //Ask how many managers that the user want to enter if he/she chose option 1
               if(menuoption == 1 &&  numberofMessages == 0){
-                 System.out.println("How many messages you want to enter?");
+                 System.out.print("How many messages you want to enter?: ");
                  numberofMessages = Integer.parseInt(input.nextLine());
               }
               
               if(menuoption == 1 && messagesEntered < numberofMessages){
-                      
+                      String messageIDMessage = login.createMessageID();
+                      System.out.println(messageIDMessage);
                   //Recipient cell number
-                  System.out.print("Enter recipient cellphone number");
+                  System.out.print("Enter recipient cellphone number: ");
                   String recipient = input.nextLine();
-                  while(recipient.length() > 10 || !login.checkPhoneNumber(recipient)){
+                  while(!login.checkPhoneNumber(recipient)){
                       System.out.println("Cellphone number is incorrectedly formatted"
                               + "or does not contain an international code.");
                       System.out.print("Enter recipient cellphone number again: ");
@@ -121,22 +122,23 @@ public class ResgistrationAndLoginFeature {
                  
                   //Options to do with ur message
                 System.out.println("Send Message");
-                System.out.println("Disgard Message");
+                System.out.println("Disregard Message");
                 System.out.println("Store Message to send later");
                 System.out.print("Select an option: ");
                 String sendOption = input.nextLine();
              
                 //The outcomes for the selected options
-               while(!sendOption.equals("Send Message") && !sendOption.equals("Disgard Message") && !sendOption.equals("Store Message to send later")){
+               while(!sendOption.equals("Send Message") && !sendOption.equals("Disregard Message") && !sendOption.equals("Store Message to send later")){
                    System.out.print("Select an option again.");
                     sendOption = input.nextLine();
                }
                login.SentMessage(sendOption);
                if(sendOption.equals("Send Message")){
                    System.out.println("Message sent successfully");
+                   System.out.println(login.printMessages());
                    
                 }
-               else if(sendOption.equals("Disgard Message")){
+               else if(sendOption.equals("Disregard Message")){
                    System.out.println("Press 0 to delete the message");
                }
                else{
