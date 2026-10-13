@@ -121,15 +121,15 @@ public class ResgistrationAndLoginFeature {
                   String messageHash = login.createMessageHash();
                  
                   //Options to do with ur message
-                System.out.println("1) Send Message");
-                System.out.println("2) Disregard Message");
-                System.out.println("3) Store Message to send later");
+                System.out.println(" Send Message");
+                System.out.println(" Disregard Message");
+                System.out.println(" Store Message to send later");
                 System.out.print("Select an option: ");
                 String sendOption = input.nextLine();
              
                 //The outcomes for the selected options
                while(!sendOption.equals("Send Message") && !sendOption.equals("Disregard Message") && !sendOption.equals("Store Message to send later")){
-                   System.out.print("Select an option again.");
+                   System.out.print("Select an option again: ");
                     sendOption = input.nextLine();
                }
                login.SentMessage(sendOption);
@@ -147,7 +147,7 @@ public class ResgistrationAndLoginFeature {
                   messagesEntered++;
                }
               else if(menuoption == 1){
-                  System.out.println("you have already  all" +numberofMessages+ "messages");
+                  System.out.println("you have already all" + numberofMessages + " messages");
               } 
               else if(menuoption == 2){
                   System.out.println("Coming soon");
