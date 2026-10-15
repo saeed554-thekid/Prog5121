@@ -38,6 +38,29 @@ public class MessageTest {
         String expected = "Cellphone number is incorrectly formatted"
                 + " or does not contain an international code."
                 + " Please coorect the number and try again";
+        assertEquals(expected, login.checkRecipientCell("08575975889"));
     }
     
+    @Test
+    public void testMessageHashTestCase1(){
+        login.setMessageID("0012345678");
+        login.setNumMessageSent(0);
+        login.checkMessage("Hi Mike, can you join us for dinner tonight?");
+        assertEquals("00:0:HITONIGHT", login.createMessageHash());
+    }
+    
+    @Test
+    public void testMessageHashesInAloop(){
+      String[] ids = {"0012345678", "1234567890"};
+      String[] texts = {"Hi Mike, can you join us for dinner tonight?", "Hi Keegan did you recieve the payment?"};
+      String[] expectedHashes = {"00:0:HITONIGHT", "12:1 HIPAYMENT"};
+      
+      for(int i = 0; i< ids.length; i++){
+          Login m = new Login();
+          m.setMessageID(ids[i]);
+          m.setNumMessageSent(i);
+          m.checkMessage(texts[i]);
+         assertEquals(expectedHashes[i], m.createMessageHash());
+      }
+    }
 }
