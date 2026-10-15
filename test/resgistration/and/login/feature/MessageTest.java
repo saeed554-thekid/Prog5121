@@ -63,4 +63,42 @@ public class MessageTest {
          assertEquals(expectedHashes[i], m.createMessageHash());
       }
     }
+    
+    @Test
+    public void testMessageIDCreated(){
+        String result = login.createMessageID();
+        assertTrue(result.startsWith("Message ID generated"));
+    }
+    
+    @Test
+    public void testSendMessafe(){
+        login.createMessageID();
+        login.checkRecipientCell("+27718693002");
+        login.checkMessage("Hi Mike, can you join us for dinner tonight");
+        login.createMessageHash();
+        assertEquals("Message successfully sent.", login.SentMessage("Send Message"));
+    }
+    
+    @Test
+    public void testDiregardMessage(){
+        assertEquals("Press 0 to delete the message.", login.SentMessage("Disregard Message"));        
+    }
+    
+    @Test
+    public void testStoreMessage(){
+        login.createMessageID();
+        login.checkRecipientCell("+27718693002");
+        login.checkMessage("Hi Mike, can you join us for dinner tonight");
+        login.createMessageHash();
+        assertEquals("Message successfully stored.", login.SentMessage("Store Message to send later"));
+    }
+    
+    @Test
+    public void testTotalMessagesSent(){
+        login.createMessageID();
+        login.checkRecipientCell("+27718693002");
+        login.checkMessage("Hi Mike, can you join us for dinner tonight?");
+        login.createMessageHash();
+        login.SentMessage("Send Message");
+    }
 }
