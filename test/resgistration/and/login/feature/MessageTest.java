@@ -24,20 +24,21 @@ public class MessageTest {
         for(int i = 0; i < 260; i++){
             longMessage = longMessage + "a";
         }
-        String expected = "Message exceeds 250 characters by 15; please reduce the size.";        
+        String expected = "Message exceeds 250 characters by 10; please reduce the size."; 
+        assertEquals(expected, login.checkMessage(longMessage));
     }
     
     @Test
     public void testRecipientCorrectlyFormatted(){
         String expected = "Cellphone number successfully captured.";
-        assertEquals(expected, login.checkRecipientCell("+2771869002"));
+        assertEquals(expected, login.checkRecipientCell("+27718693002"));
     }
     
     @Test
     public void testRecipientIncorrectlyFormatted(){
         String expected = "Cellphone number is incorrectly formatted"
                 + " or does not contain an international code."
-                + " Please coorect the number and try again";
+                + " Please correct the number and try again.";
         assertEquals(expected, login.checkRecipientCell("08575975889"));
     }
     
@@ -53,7 +54,7 @@ public class MessageTest {
     public void testMessageHashesInAloop(){
       String[] ids = {"0012345678", "1234567890"};
       String[] texts = {"Hi Mike, can you join us for dinner tonight?", "Hi Keegan did you recieve the payment?"};
-      String[] expectedHashes = {"00:0:HITONIGHT", "12:1 HIPAYMENT"};
+      String[] expectedHashes = {"00:0:HITONIGHT", "12:1:HIPAYMENT"};
       
       for(int i = 0; i< ids.length; i++){
           Login m = new Login();
@@ -71,7 +72,7 @@ public class MessageTest {
     }
     
     @Test
-    public void testSendMessafe(){
+    public void testSendMessage(){
         login.createMessageID();
         login.checkRecipientCell("+27718693002");
         login.checkMessage("Hi Mike, can you join us for dinner tonight");
@@ -80,7 +81,7 @@ public class MessageTest {
     }
     
     @Test
-    public void testDiregardMessage(){
+    public void testDisregardMessage(){
         assertEquals("Press 0 to delete the message.", login.SentMessage("Disregard Message"));        
     }
     
@@ -100,5 +101,12 @@ public class MessageTest {
         login.checkMessage("Hi Mike, can you join us for dinner tonight?");
         login.createMessageHash();
         login.SentMessage("Send Message");
+        
+        login.createMessageID();
+        login.checkMessage("Hi Keegan, did you recieve the payment?");
+        login.createMessageHash();
+        login.SentMessage("Disregard Message");
+        assertEquals(1, login.returnTotalMessages());
+     
     }
 }
