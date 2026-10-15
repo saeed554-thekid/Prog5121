@@ -81,7 +81,7 @@ public String checkRecipientCell(String cellphone){
     else{
     return "Cellphone number is incorrectly formatted"
             + " or does not contain an international code."
-            + " Please correct the number  and try again.";
+            + " Please correct the number and try again.";
 }    
      
  }
