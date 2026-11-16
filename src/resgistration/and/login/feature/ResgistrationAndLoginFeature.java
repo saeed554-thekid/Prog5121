@@ -90,6 +90,7 @@ public class ResgistrationAndLoginFeature {
               }
               
               if(menuoption == 1 && messagesEntered < numberofMessages){
+                  for(int i = 0; i < numberofMessages; i++){
                       String messageIDMessage = login.createMessageID();
                       System.out.println(messageIDMessage);
                   //Recipient cell number
@@ -146,6 +147,7 @@ public class ResgistrationAndLoginFeature {
                }
                   messagesEntered++;
                }
+              }
               else if(menuoption == 1){
                   System.out.println("you have already all" + numberofMessages + " messages");
               } 

@@ -14,7 +14,8 @@ public class Login {
       private String recipient; 
       private String messageText;
       private String MessageHash; 
-      private String allMessages = "";       
+      private String allMessages = "";   
+      private String storedMessages = "";
 
 //Methods
     public boolean checkUserName(String username){
@@ -71,7 +72,7 @@ public String createMessageID(){
     return "Message ID generated: " + messageID;
 }
 public boolean checkMessageID(){
-    return messageID.length() <=10;
+    return messageID.matches("[0-9]{10}");
 }
 public String checkRecipientCell(String cellphone){
     if(checkPhoneNumber(cellphone)){
@@ -128,10 +129,15 @@ public int returnTotalMessages(){
 //This stores messages in the JSON file
 public void storeMessage(){
     try{
-        BufferedWriter writer = new BufferedWriter(new FileWriter("storeMessage.json", true));
-        writer.write("{\"messageID\": \"" + messageID + "\", \"messageHash\":\"" + MessageHash + "\", \"recipient\": \"" + recipient + "\", \"message\": \""  + messageText + "\"}" );
-    writer.newLine();
-    writer.close();
+     if(!storedMessages.equals("")){
+         storedMessages = storedMessages + ",\n";
+     }
+     String  safeMessage = messageText.replace("\\", "\\\\").replace("\"", "\\\"");
+     storedMessages = storedMessages + "{\"messageID\": \"" + messageID + "\", \"messageHash\": \"" + MessageHash + "\", \"recipient\": \"" + recipient + "\", \"message\": \"" + safeMessage + "\"}";
+     BufferedWriter writer = new BufferedWriter(new FileWriter("storeMessage.json"));
+     writer.write("[\n" + storedMessages + "\n]");
+             writer.newLine();
+             writer.close();
     }
     catch(IOException e){
         System.out.println("Could not write JSON file");
