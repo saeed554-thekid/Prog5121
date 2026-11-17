@@ -236,7 +236,102 @@ private String getValue(String line, String key){
     }
     return line.substring(start, end);
 }
+// The sender and recipient for case a 
+public String displaySenderRecipient(String sender){
+    String result = "";
+    for(int i = 0; i < total; i++){
+        if(flags[i].equals("Sent")){
+            result = result + "Sender: " + sender + "Recipient: " + recipients[i] + "\n";
+            
+        }
+    }
+    return result;
+}
+// case b 
+public String displayLongestMessage(){
+    String longest = "";
+    for(int i = 0; i < total; i++){
+        if(messages[i].length() > longest.length()){
+            longest = messages[i];
+        }
+    }
+    return longest;
+}
+//case c
+public int searchMessageID(String id){
+    for(int i = 0; i < total; i++){
+        if(messageIDs[i].equals(id)){
+            return i;
+        }
+    }
+    return -1;
+}
+// case d
+public String searchRecipient(String recipient){
+    String result = "";
+    for(int i = 0; i < total; i++){
+        if(recipients[i].equals(recipient) && !flags[i].equals("Disregard")){
+            result = result + messages[i] + "/n";
+        }
+    }
+    return result;
+}
+//case e
+public String deleteByHash(String hash){
+    for(int i = 0; i < total; i++){
+        if(messageHashes[i].equals(hash)){
+            String deleted = messages[i];
+            removeFromList(i);
+            return "Message \"" + deleted + "\" successfully deleted.";
+        }
+}
+    return "Message hash not found.";
+}
 
+//moves everything of i by 1
+private void removeFromList(int i){
+    String flag = flags[i];
+    String text = messages[i];
+    for(int j = i; j < total - 1; j++){
+        messageIDs[j] = messageIDs[j + 1];
+        messageHashes[j] = messageHashes[j + 1];
+        recipients[j] = recipients[j + 1];
+        messages[j] = messages[j + 1];
+        flags[j] = flags[j +1];
+    }
+    total--;
+    if(flag.equals("Sent")){
+        sentCount = removeText(sentMessages, sentCount, text);
+    }
+    else if(flag.equals("Stored")){
+        sentCount = removeText(storedMessageList, storedCount, text);
+    }
+    else{
+        disregardedCount =  removeText(disregardedMessages, disregardedCount, text);
+    }
+}
+//remove a text and reutrns the new count
+private int removeText(String[] list, int count, String text){
+for(int i = 0; i < count; i++){
+    if(list[i].equals(text)){
+        for(int j = i; j < count -1; j++){
+            list[j] = list[j + 1];
+        }
+        return count - 1;
+    }
+}    
+  return count;
+}
+//case f
+public String displayReport(){
+    String report = "";
+    for(int i = 0; i < total; i++){
+        if(!flags[i].equals("Disregard")){
+            report = report + "Message Hash: " + messageHashes[i] + "\nRecipient: " + recipients[i] + "\nMessage: " +messages[i] + "\n\n";
+        }
+    }
+    return report;
+}
 }
 
 
