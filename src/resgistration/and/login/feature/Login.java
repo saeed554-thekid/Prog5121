@@ -1,6 +1,9 @@
 package resgistration.and.login.feature;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class Login {
       private String username;
@@ -146,9 +149,94 @@ public void storeMessage(){
 public void setMessageID(String messageID){
     this.messageID = messageID;
 }
+
+//gets the message ID
+public String getMessageID(){
+    return messageID;
+}
+
 public void setNumMessageSent( int numMessageSent){
     this.numMessageSent = numMessageSent;
 }
+
+//Part 3 methods
+String[] sentMessages = new String[100];
+String[] disregardedMessages = new String[100];
+String[] storedMessageList = new String[100];
+String[] messageHashes = new String[100];
+String[] messageIDs = new String[100];
+
+//keeps every message at the same position
+String[] recipients = new String[100];
+String[] messages = new String[100];
+String[] flags = new String[100];
+ 
+int sentCount = 0;
+int disregardedCount = 0;
+int storedCount = 0;
+int total = 0;
+
+//allows one message to get add to the arrays
+public void addMessage(String id, String hash, String recipient, String message, String flag){
+
+    messageIDs[total] = id;
+    messageHashes[total] = hash;
+    recipients[total] = recipient;
+    messages[total] = message;
+    flags[total] = flag;
+    total++;
+    
+    if(flag.equals("Sent")){
+        sentMessages[sentCount] = message;
+        sentCount++;
+    }
+    else if(flag.equals("Stored")){
+        storedMessageList[storedCount] = message;
+        storedCount++;
+    }
+    else{
+        disregardedMessages[disregardedCount] = message;
+        disregardedCount++;
+    }
+}
+
+public void loadStoredMessages(String fileName){
+    Path file = Paths.get(fileName);
+    if(!Files.exists(file)){
+        return;
+    }
+    try{
+        BufferedReader reader = new BufferedReader(new InputStreamReader(Files.newInputStream(file)));
+        String line = reader.readLine();
+        while(line != null){
+            if(line.indexOf("messageID") != -1){
+                String id = getValue(line, "messageID");
+                String hash = getValue(line, "messageHash");
+                String recipient = getValue(line, "recipient");
+                String message = getValue(line, "message");
+                addMessage(id, hash, recipient, message, "Stored");
+            }
+            line =  reader.readLine();
+        }
+        reader.close();
+    }
+    catch(IOException e){
+        System.out.println("Could note read JSON file");
+    }
+}
+private String getValue(String line, String key){
+    String find = "\"" + key + "\": \"";
+    int start = line.indexOf(find) + find.length();
+    int end = line.indexOf("\"", start);
+    if(key.equals("message")){
+      end = line.trim().length() - 2;
+      if(line.trim().endsWith(",")){
+          end = end - 1;
+      }
+    }
+    return line.substring(start, end);
+}
+
 }
 
 

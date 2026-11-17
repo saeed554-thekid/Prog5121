@@ -7,6 +7,10 @@ public class ResgistrationAndLoginFeature {
     public static void main(String[] args) {
       Scanner input = new Scanner(System.in);
       Login login = new Login();
+      
+      //creates and populate the arrays
+     login.loadStoredMessages("storeMessage.json");
+     
       //Username being created 
       System.out.print("Enter username: ");
       String username = input.nextLine();
@@ -80,6 +84,7 @@ public class ResgistrationAndLoginFeature {
                System.out.println("option 1) Send messages");
                System.out.println("Option 2) Coming soon");
                System.out.println("option 3) Quit");
+               System.out.println("option 4) Stored Messages");
                System.out.print("Choose an option: ");
                menuoption = Integer.parseInt(input.nextLine());
                
@@ -134,6 +139,15 @@ public class ResgistrationAndLoginFeature {
                     sendOption = input.nextLine();
                }
                login.SentMessage(sendOption);
+               // messages saved into arrays with flags
+               String flag = "Stored";
+               if(sendOption.equals("Send Message")){   
+                   flag = "Sent";
+               }
+               if(sendOption.equals("Disregard Message")){
+                   flag = "Disregard";
+               }
+               login.addMessage(login.getMessageID(), messageHash, recipient, message, flag);
                if(sendOption.equals("Send Message")){
                    System.out.println("Message sent successfully");
                    System.out.println(login.printMessages());
@@ -153,6 +167,49 @@ public class ResgistrationAndLoginFeature {
               } 
               else if(menuoption == 2){
                   System.out.println("Coming soon");
+              }
+              else if(menuoption == 4){
+                  System.out.println("a) Sender and recipient of all send messages");
+                  System.out.println("b) Longest message");
+                  System.out.println("c) Search for a message ID");
+                  System.out.println("d) Search messages for a recipient");
+                  System.out.println("e) Delete a message using its hash");
+                  System.out.println("f) Report of all messages");
+                  System.out.print("Choose a letter: ");
+                  String choice = input.nextLine();
+                  switch(choice){
+                      case "a":
+                          System.out.println(login.displaySenderRecipient(username));
+                          break;
+                      case "b":
+                          System.out.println(login.displayLongestMessage());
+                          break;
+                      case "c":
+                          System.out.print("Enter the message ID: ");
+                          int position = login.searchMessageID(input.nextLine());
+                          if(position == -1){
+                              System.out.println("Message ID not found");
+                          }
+                          else{
+                              System.out.println("Recipient: " + login.recipients[position]);
+                              System.out.println("Message: " + login.messages[position]);
+                          }
+                          break;
+                      case "d":
+                          System.out.print("Enter the recipient: ");
+                          System.out.println(login.searchRecipient(input.nextLine()));
+                          break;
+                      case "e":
+                          System.out.print("Enter the message hash: ");
+                          System.out.println(login.deleteByHash(input.nextLine()));
+                          break;
+                      case "f":
+                          System.out.println(login.displayReport());
+                          break;
+                      default:
+                     System.out.println("Please choose a letter from a to f.");
+                              
+                  }
               }
               }
               
