@@ -271,7 +271,7 @@ public String searchRecipient(String recipient){
     String result = "";
     for(int i = 0; i < total; i++){
         if(recipients[i].equals(recipient) && !flags[i].equals("Disregard")){
-            result = result + messages[i] + "/n";
+            result = result + messages[i] + "\n";
         }
     }
     return result;
