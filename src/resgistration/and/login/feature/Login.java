@@ -229,8 +229,8 @@ private String getValue(String line, String key){
     int start = line.indexOf(find) + find.length();
     int end = line.indexOf("\"", start);
     if(key.equals("message")){
-      end = line.trim().length() - 2;
-      if(line.trim().endsWith(",")){
+      end = line.length() - 2;
+      if(line.endsWith(",")){
           end = end - 1;
       }
     }
@@ -241,8 +241,8 @@ public String displaySenderRecipient(String sender){
     String result = "";
     for(int i = 0; i < total; i++){
         if(flags[i].equals("Sent")){
-            result = result + "Sender: " + sender + "Recipient: " + recipients[i] + "\n";
-            
+            result = result + "Sender: " + sender + " Recipient: " + recipients[i] + "\n";
+             
         }
     }
     return result;
@@ -304,7 +304,7 @@ private void removeFromList(int i){
         sentCount = removeText(sentMessages, sentCount, text);
     }
     else if(flag.equals("Stored")){
-        sentCount = removeText(storedMessageList, storedCount, text);
+        storedCount = removeText(storedMessageList, storedCount, text);
     }
     else{
         disregardedCount =  removeText(disregardedMessages, disregardedCount, text);

@@ -84,6 +84,7 @@ public class ResgistrationAndLoginFeature {
                System.out.println("option 1) Send messages");
                System.out.println("Option 2) Coming soon");
                System.out.println("option 3) Quit");
+               //for part 3
                System.out.println("option 4) Stored Messages");
                System.out.print("Choose an option: ");
                menuoption = Integer.parseInt(input.nextLine());
@@ -168,6 +169,7 @@ public class ResgistrationAndLoginFeature {
               else if(menuoption == 2){
                   System.out.println("Coming soon");
               }
+              //part 3 
               else if(menuoption == 4){
                   System.out.println("a) Sender and recipient of all send messages");
                   System.out.println("b) Longest message");
